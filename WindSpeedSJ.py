@@ -1,14 +1,17 @@
-# WindSpeedSJ.py file
-'''
-Usage:
-WindSpeedSJ.py [options]
+### WindSpeedSJ.py file
 
-unit-option:
+"""
+Usage:
+WindSpeedSJ.py  --minutes <float> [--metric <bool>...]
+
+Required options:
+  --minutes <float>
+  --hours <float>
+
+Options:
    --metric=<bool>
    --imperial=<bool>  [default: True]
-
-
-'''
+"""
 
 from docopt import docopt
 import requests
@@ -16,14 +19,6 @@ import sys
 import schedule
 import time
 import datetime
-
-def main():
-
-   args = docopt(__doc__)
-   print(args)
-   global velocity
-   velocity = float('-inf')
-   scheduler(args)
 
 #class WindData(object):
    #def __init__(self, velocity):
@@ -77,17 +72,29 @@ def check_windspeed(unit="imperial"):
 
 def scheduler(args):
 
+   if args['--minutes']:
+      minutes = int(args['--minutes'])
+   elif args['--hours']:
+      minutes = 60*int(args['--hour'])
+
    if args['--metric']:
       check_windspeed('metric')
       schedule.every(1).minutes.do(check_windspeed, 'metric')
    else:
       check_windspeed()
       schedule.every(1).minutes.do(check_windspeed)
-   schedule.every(3).minutes.do(exit)
+   schedule.every(minutes).minutes.do(exit)
 
    while True:
       schedule.run_pending()
       time.sleep(1)
+
+def main():
+
+   args = docopt(__doc__)
+   global velocity
+   velocity = float('-inf')
+   scheduler(args)
 
 if __name__ == '__main__':
    main()
