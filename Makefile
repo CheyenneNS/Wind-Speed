@@ -1,10 +1,10 @@
-SHELL:=/bin/bash
-PROJECT=WindSpeed
-VERSION=3.9.2
+SRC_DIR = src
+PROJECT := WindSpeed
+VERSION=^3.7.2
 VENV=${PROJECT}-${VERSION}
 VENV_DIR=$(shell pyenv root)/versions/${VENV}
-DIR=/src
-PYTHON=${VENV_DIR}/bin/python
+units=--imperial=True
+python = python3
 
 ## Make sure you have `pyenv` and `pyenv-virtualenv` installed beforehand
 ##
@@ -64,8 +64,12 @@ develop: venv requirements.txt ##@main >> update requirements.txt inside the vir
 	@echo "$(ccso)--> Updating packages $(ccend)"
 	$(PYTHON) -m pip install -r requirements.txt
 
-WindSpeedSJ:
-	python3 WindSpeedSJ.py
+serve:
+	  python3 $(SRC_DIR)/WindSpeedSJ.py $(time) $(units)
+
+test:
+	python3 -m unittest discover -p '*tests.py' -v
+
 
 # And add help text after each target name starting with '\#\#'
 # A category can be added with @category
