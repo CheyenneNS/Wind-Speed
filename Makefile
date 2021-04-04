@@ -1,10 +1,11 @@
-SRC_DIR = src
-PROJECT := WindSpeed
-VERSION=^3.7.2
+SHELL:=/bin/bash
+PROJECT=WindSpeed
+VERSION=3.9.2
 VENV=${PROJECT}-${VERSION}
 VENV_DIR=$(shell pyenv root)/versions/${VENV}
+PYTHON=${VENV_DIR}/bin/python3
+SRC_DIR = src
 units=--imperial=True
-python = python3
 
 ## Make sure you have `pyenv` and `pyenv-virtualenv` installed beforehand
 ##

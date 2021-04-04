@@ -1,38 +1,40 @@
-import unittest
-from unittest.mock import patch
-from WindSpeed.src.WindSpeedSJ import check_windspeed
-from WindSpeed.src.WindSpeedSJ import WindData
-from WindSpeed.src.WindSpeedSJ import wind_direction
-from WindSpeed.src.WindSpeedSJ import call_api
+# Imports
+from unittest import TestCase
+from .WindSpeedImpl import check_windspeed, WindData, wind_direction, call_api
 import requests
-import mock
+import unittest
+from unittest import mock
+from unittest.mock import patch
 
 
 class CheckWindSpeedTest(unittest.TestCase):
 
     def testWindInformation(self):
-        # test for correct wind data in meters
+        """
+        Test for correct wind data in meters
+        """
+        # Initiate Wind Object and declare units
         wind_data = WindData()
         unit = "metric"
         units = {"imperial": "mi/h", "metric": "m/s"}
-
+        # Get response from OpenWeather Api and allocate to dictionary values to variables
         response = requests.get("https://api.openweathermap.org/data/2.5/weather?q=san+jose&appid=3207703ee5d0d14e6b6a53d10071018f&units=" + unit)
         wind_info = response.json()['wind']
         wind_speed = float(wind_info['speed'])
         degrees = int(wind_info['deg'])
-
+        # Update wind object data and calculate degrees
         direction = wind_direction(degrees)
         wind_data.degrees = degrees
-        wind_data.velocity = wind_speed
+        wind_data.speed = wind_speed
         wind_data.direction = direction
-
-        result_test1 = 'Current wind speed in San Jose: {} {} {}'.format(wind_data.velocity,
+        # Run test
+        result_test1 = 'Current wind speed in San Jose: {} {} {}'.format(wind_data.speed,
                                                                          units[unit],
                                                                          wind_data.direction)
         self.assertEqual(check_windspeed(WindData(), unit), result_test1)
-
-        wind_data.velocity = 1000
-        result_test2 = 'Current wind speed in San Jose: {} {} {}'.format(wind_data.velocity,
+        # Update wind speed and test against local value
+        wind_data.speed = 1000
+        result_test2 = 'Current wind speed in San Jose: {} {} {}'.format(wind_data.speed,
                                                                          units[unit],
                                                                          wind_data.direction)
         self.assertNotEqual(check_windspeed(WindData()), result_test2)
@@ -64,7 +66,7 @@ class CheckWindSpeedTest(unittest.TestCase):
             )
         return mock_resp
 
-    @patch('WindSpeedSJ.requests.get')  # Mock 'requests' module 'get' method.
+    @patch('requests.get')  # Mock 'requests' module 'get' method.
     def test_failed_api_call(self, mock_get):
         mock_resp = self._mock_response(status=401)
         mock_get.return_value.status_code = mock_resp
