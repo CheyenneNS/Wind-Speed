@@ -52,8 +52,6 @@ $ make test
 
 ##  Further Documentation 
 
-* [`docopt`]: https://pypi.org/project/docopt
+* [`docopt`](https://pypi.org/project/docopt/)
 
-* [`Open Weather Map API`]: https://openweathermap.org/current
-
-
+* [`Open Weather Map API`](https://openweathermap.org/current)
