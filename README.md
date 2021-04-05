@@ -6,7 +6,7 @@ This repository contains code for a Command Line Interface (CLI) program to gath
 The Windspeed program uses DocOpt to create the main CLI. 
 Users are required to provide a runtime for the program, given in minutes or hours. Unit options are optional with the default unit being miles per hour.
 
-The program queries the Open Weather Map API for windspeed data in San Jose California and outputs results to the terminal. 
+The program queries [`Open Weather Map`](https://openweathermap.org/api) for windspeed data in San Jose California and outputs results to the terminal. 
 When windspeed variables change - either in speed or direction - new results are updated to the terminal. 
 
 ## Getting Started
