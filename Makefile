@@ -69,7 +69,7 @@ serve:
 	  python3 $(SRC_DIR)/WindSpeedSJ.py $(time) $(units)
 
 test:
-	python3 -m unittest discover -p '*tests.py' -v
+	python3 -m unittest discover -p '*testImpl.py' -v
 
 
 # And add help text after each target name starting with '\#\#'

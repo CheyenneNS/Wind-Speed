@@ -48,7 +48,13 @@ To run tests:
 ```sh
 $ make test
 ```
+### Clean
 
+To deactivate your virtual environment run:
+
+```sh
+$ make clean
+```
 
 ##  Further Documentation 
 
