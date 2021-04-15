@@ -49,7 +49,7 @@ def scheduler(args, windObj):
 
    if args['--metric']:
       check_windspeed(windObj, 'metric')
-      schedule.every(1).minutes.do(check_windspeed, 'metric', windObj)
+      schedule.every(1).minutes.do(check_windspeed, windObj, 'metric')
    else:
       check_windspeed(windObj)
       schedule.every(1).minutes.do(check_windspeed, windObj)
