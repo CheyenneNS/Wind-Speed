@@ -2,14 +2,14 @@
 
 """
 Usage:
-WindSpeedSJ.py  --minutes <float> [--metric <bool>]
-WindSpeedSJ.py  --minutes <float> [--imperial <bool>]
-WindSpeedSJ.py  --hours <float> [--metric <bool>]
-WindSpeedSJ.py  --hours <float> [--imperial <bool>]
+WindSpeedSJ.py  --minutes <int> [--metric <bool>]
+WindSpeedSJ.py  --minutes <int> [--imperial <bool>]
+WindSpeedSJ.py  --hours <int> [--metric <bool>]
+WindSpeedSJ.py  --hours <int> [--imperial <bool>]
 
 Required options:
-  --minutes <float>
-  --hours <float>
+  --minutes <int>
+  --hours <int>
 
 Options:
    --metric=<bool>
